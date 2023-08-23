@@ -40,23 +40,24 @@ class TestPerson:
 
     def test_valid_name(self):
         '''saves name if string between 1 and 25 characters.'''
-        guido = Person("Guido")
+        guido = Person(name="Guido", job="sales")
         assert(guido.name == "Guido")
 
     def test_valid_name_title_case(self):
         '''converts name to title case and saves if between 1 and 25 characters'''
-        guido = Person(name="guido van rossum")
+        guido = Person(name="guido van rossum", job="sales")
         assert(guido.name == "Guido Van Rossum")
 
     def test_job_not_in_list(self):
         '''prints "Job must be in list of approved jobs." if not in job list.'''
         captured_out = io.StringIO()
         sys.stdout = captured_out
-        Person(job="Benevolent dictator for life")
+        Person(name='guido van rossum',job="Benevolent dictator for life")
         sys.stdout = sys.__stdout__
         assert(captured_out.getvalue() == "Job must be in list of approved jobs.\n")
 
+
     def test_job_in_list(self):
         '''saves job if in job list.'''
-        guido = Person(job="ITC")
+        guido = Person(name="guido van rossum",job="ITC")
         assert(guido.job == "ITC")
